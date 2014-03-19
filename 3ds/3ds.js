@@ -72,6 +72,12 @@ $(function()
 			var queryFiles = [
 				"ability",
 				"item",
+				"location",
+				"move",
+				"pokemon_species",
+				"region",
+				"stat",
+				"version"
 			];
 			dataNum = queryFiles.length;
 			
