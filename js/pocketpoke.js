@@ -34,17 +34,15 @@ function loadPP()
 {
 	if (location.protocol != "file:")
 	{
-		//load files to do querys on
-		//use majik: $.csv.toObjects(data)
 		var queryFiles = [
 			"ability",
 			"item",
-			"location",
+			//"location",
 			"move",
 			"pokemon_species",
-			"region",
+			//"region",
 			"stat",
-			"version"
+			//"version"
 		];
 		dataNum = queryFiles.length;
 		
