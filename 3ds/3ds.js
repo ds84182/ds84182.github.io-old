@@ -3,11 +3,10 @@ function getDataProcessor(q)
 {
 	return function( data ) {
 		var csvobj = $.csv.toObjects(data);
-		alert("Loaded "+q);
-		for (var i in cvsobj)
+		for (var i in csvobj)
 		{
-			var v = cvsobj[i];
-			if (queryData[v.name] === "undefined")
+			var v = csvobj[i];
+			if (queryData[v.name] == null)
 			{
 				queryData[v.name] = [];
 			}
