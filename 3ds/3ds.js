@@ -30,12 +30,14 @@ function searchPage()
 		{
 			match(queryData[s]);
 		}
-		for (var k, d in queryData)
+		for (var k in queryData)
 		{
+			var d = queryData[k];
 			if (k != s)
 			{
-				for (var n, word in words)
+				for (var n in words)
 				{
+					var word = words[n];
 					if (k.indexOf(word) >= 0)
 					{
 						match(d);
