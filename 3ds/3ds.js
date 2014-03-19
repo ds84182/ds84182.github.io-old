@@ -17,13 +17,43 @@ var ui = {
 					break;
 				}
 			}
-			pageInit();
-			$(".hcontent").append("<h4>"+data.name+" - The "+data.csv.genus+" Pokemon</h4>");
-			var b = $("<button>Search</button>");
-			$(".content").append(b);
-			b.click(loadPP);
-			
-			$(".content").append(JSON.stringify(pk));
+			$.get( "/json/pokemon_species.json", function(species)
+			{
+				species = JSON.parse(species);
+				//find the id for the pkmn
+				for (var k in species)
+				{
+					var v = species[k];
+					if (v.id == data.id)
+					{
+						species = v;
+						break;
+					}
+				}
+				
+				var included = [];
+				for (var i in sprite_versions)
+				{
+					i = sprite_versions[i];
+					if (Number(i.generation_id) >= Number(species.generation_id))
+					{
+						included.push(i.identifier);
+					}
+				}
+				
+				pageInit();
+				$(".hcontent").append("<h4>"+data.name+" - The "+data.csv.genus+" Pokemon</h4>");
+				var b = $("<button>Search</button>");
+				$(".content").append(b);
+				b.click(loadPP);
+				
+				$(".content").append(JSON.stringify(pk));
+				
+				included.forEach(function(v)
+				{
+					$(".content").append("<img src='"+mediaDir+"pokemon/main-sprites/"+v+"/"+pk.id+".png'/>"+v+"<br>");
+				});
+			});
 		});
 	}
 }

@@ -1,5 +1,31 @@
 var queryData = {}; //objects that point to datatype and id
 var dataNum = 0;
+queryFiles = [ //These are also the types
+	"ability",
+	"item",
+	"location",
+	"move",
+	"pokemon_species",
+	"region",
+	"stat",
+	"version"
+];
+
+var mediaDir = "/media/";
+
+function doLater(func)
+{
+	setTimeout(func,100);
+}
+
+function UrlExists(url)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    return http.status!=404;
+}
+
 function getDataProcessor(q)
 {
 	return function( data ) {
@@ -30,22 +56,34 @@ function doQuery(q)
 	$.get( "/json/"+q+"_names.json", getDataProcessor(q));
 }
 
+function loadJSON(f,obj,index)
+{
+	$.get( "/json/"+f+".json", function(data)
+	{
+		obj[index] = JSON.parse(data);
+	});
+}
+
+sprite_versions = [{"id":"1","identifier":"red-blue","generation_id":"1","order":"1"},
+{"id":"2","identifier":"yellow","generation_id":"1","order":"2"},
+{"id":"3","identifier":"gold","generation_id":"2","order":"3"},
+{"id":"3","identifier":"silver","generation_id":"2","order":"3"},
+{"id":"4","identifier":"crystal","generation_id":"2","order":"4"},
+{"id":"5","identifier":"ruby-sapphire","generation_id":"3","order":"5"},
+{"id":"6","identifier":"emerald","generation_id":"3","order":"6"},
+{"id":"7","identifier":"firered-leafgreen","generation_id":"3","order":"9"},
+{"id":"8","identifier":"diamond-pearl","generation_id":"4","order":"10"},
+{"id":"9","identifier":"platinum","generation_id":"4","order":"11"},
+{"id":"10","identifier":"heartgold-soulsilver","generation_id":"4","order":"12"},
+{"id":"11","identifier":"black-white","generation_id":"5","order":"13"},
+{"id":"15","identifier":"x-y","generation_id":"6","order":"15"}];
+
 function loadPP()
 {
 	if (location.protocol != "file:")
 	{
 		pageInit();
 		loadScreen();
-		var queryFiles = [
-			"ability",
-			"item",
-			"location",
-			"move",
-			"pokemon_species",
-			"region",
-			"stat",
-			"version"
-		];
 		dataNum = queryFiles.length;
 		
 		for (var i in queryFiles)
