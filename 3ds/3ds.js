@@ -28,6 +28,11 @@ var ui = {
 	}
 }
 
+window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+    alert("Error occured: " + errorMsg);//or any message
+    return false;
+}
+
 function pageInit()
 {
 	$(".content").empty();
