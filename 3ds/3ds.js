@@ -17,8 +17,12 @@ function searchPage()
 	pageInit();
 	var match = function(qd)
 	{
-		var b = $("<button>"+qd.type+": "+qd.name+"</button>");
-		$("#results").append(b);
+		for (var i in qd)
+		{
+			var qd = qd[i];
+			var b = $("<button>"+qd.type+": "+qd.name+"</button>");
+			$("#results").append(b);
+		}
 	}
 	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><br><div id="results"></div>');
 	$("#searchb").click(function()
