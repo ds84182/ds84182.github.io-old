@@ -87,5 +87,9 @@ $(function()
 				$.get( "/json/"+q+"_names.json", getDataProcessor(q));
 			}
 		}
+		else
+		{
+			searchPage();
+		}
 	},500);
 });
