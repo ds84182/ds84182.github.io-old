@@ -9,6 +9,10 @@
 				setTimeout(function()
 				{
 					window.scrollTo(0,215);
+					$.get( "/csv/abilities.csv", function( data ) {
+						$( ".content" ).html( data );
+						alert( "Load was performed." );
+					});
 				},500);
 			});
 		</script>
@@ -19,6 +23,7 @@
 		</div>
 		<div class="content">
 			<input id="search" type="text"/>
+			<button id="searchb">Search</button>
 		</div>
     </body>
 </html>
