@@ -1,10 +1,9 @@
 var queryData = {}; //objects that point to datatype and id
 var dataNum = 0;
-var toObj = $.csv.toObjects;
 function getDataProcessor(q)
 {
 	return function( data ) {
-		var csvobj = toObj(data);
+		var csvobj = JSON.parse(data);
 		for (var i in csvobj)
 		{
 			var v = csvobj[i];
@@ -79,7 +78,7 @@ $(function()
 			for (var i in queryFiles)
 			{
 				var q = queryFiles[i];
-				$.get( "/csv/"+q+"_names.csv", getDataProcessor(q));
+				$.get( "/json/"+q+"_names.json", getDataProcessor(q));
 			}
 		}
 	},500);
