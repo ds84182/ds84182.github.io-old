@@ -36,7 +36,7 @@ function searchPage()
 			{
 				for (var n, word in words)
 				{
-					if (k.instanceOf(word))
+					if (k.indexOf(word) >= 0)
 					{
 						match(d);
 						break;
