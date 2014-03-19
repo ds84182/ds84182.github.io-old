@@ -16,6 +16,7 @@ function pageInit()
 function searchPage()
 {
 	pageInit();
+	alert(window.performance);
 	
 	var searcher = function(qd)
 	{

@@ -56,3 +56,9 @@ function loadPP()
 		searchPage();
 	}
 }
+
+function unloadPP()
+{
+	//unloads the querydata after a search is completed
+	queryData = {}; //I hope this works
+}
