@@ -15,7 +15,7 @@ var mediaDir = "/media/";
 
 function doLater(func)
 {
-	setTimeout(func,100);
+	setTimeout(func,0);
 }
 
 function UrlExists(url)
@@ -26,10 +26,23 @@ function UrlExists(url)
     return http.status!=404;
 }
 
+function foreach(array,doSomething,onComplete) {
+	var i = 0, len = array.length, completeCount = 0;
+	for(;i < len; i++) {
+		window.setTimeout(function() {
+			doSomething(arguments[0]);
+			completeCount++;
+			if (completeCount === len) { 
+				onComplete(); 
+			}
+		},0,array[i]);
+	}
+};
+
 function getDataProcessor(q)
 {
 	return function( data ) {
-		var csvobj = JSON.parse(data);
+		var csvobj = data;
 		for (var i in csvobj)
 		{
 			var v = csvobj[i];
@@ -53,7 +66,7 @@ function getDataProcessor(q)
 
 function doQuery(q)
 {
-	$.get( "/json/"+q+"_names.json", getDataProcessor(q));
+	$.get( "/json/"+q+"_names.json", getDataProcessor(q),"json");
 }
 
 function loadJSON(f,obj,index)
@@ -61,7 +74,7 @@ function loadJSON(f,obj,index)
 	$.get( "/json/"+f+".json", function(data)
 	{
 		obj[index] = JSON.parse(data);
-	});
+	},"json");
 }
 
 sprite_versions = [{"id":"1","identifier":"red-blue","generation_id":"1","order":"1"},

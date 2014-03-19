@@ -6,30 +6,10 @@ var ui = {
 		loadScreen();
 		$.get( "/json/pokemon.json", function(pk)
 		{
-			pk = JSON.parse(pk);
-			//find the id for the pkmn
-			for (var k in pk)
-			{
-				var v = pk[k];
-				if (v.id == data.id)
-				{
-					pk = v;
-					break;
-				}
-			}
+			pk = pk[Number(data.id-1)];
 			$.get( "/json/pokemon_species.json", function(species)
 			{
-				species = JSON.parse(species);
-				//find the id for the pkmn
-				for (var k in species)
-				{
-					var v = species[k];
-					if (v.id == data.id)
-					{
-						species = v;
-						break;
-					}
-				}
+				species = species[Number(data.id-1)];
 				
 				var included = [];
 				for (var i in sprite_versions)
@@ -49,12 +29,14 @@ var ui = {
 				
 				$(".content").append(JSON.stringify(pk));
 				
-				included.forEach(function(v)
+				foreach(included,function(v)
 				{
-					$(".content").append("<img src='"+mediaDir+"pokemon/main-sprites/"+v+"/"+pk.id+".png'/>"+v+"<br>");
-				});
-			});
-		});
+					var s = mediaDir+"pokemon/main-sprites/"+v+"/"+pk.id+".png";
+					if (UrlExists(s))
+						$(".content").append("<img src='"+s+"'/>"+v+"<br>");
+				},function(){});
+			},"json");
+		},"json");
 	}
 }
 
@@ -98,10 +80,13 @@ function searchPage()
 	{
 		for (var i in qd)
 		{
-			var qd = qd[i];
-			var b = $("<button>"+qd.type+": "+qd.name+"</button>");
-			b.click(searcher(qd));
-			$("#results").append(b);
+			var v = qd[i];
+			if (v != null)
+			{
+				var b = $("<button>"+v.type+": "+v.name+"</button>");
+				b.click(searcher(v));
+				$("#results").append(b);
+			}
 		}
 	}
 	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><div id="results"></div>');
@@ -114,9 +99,8 @@ function searchPage()
 		{
 			match(queryData[s]);
 		}
-		for (var k in queryData)
+		$.each(queryData, function(k,d)
 		{
-			var d = queryData[k];
 			if (k != s)
 			{
 				for (var n in words)
@@ -129,7 +113,7 @@ function searchPage()
 					}
 				}
 			}
-		}
+		});
 	});
 }
 
