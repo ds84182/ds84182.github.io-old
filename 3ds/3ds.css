@@ -1,0 +1,28 @@
+body
+{
+    margin:0;
+}
+.header
+{
+    width:400px;
+    height:215px;
+    overflow:auto;
+    margin:0;
+}
+.content
+{
+    width:320px;
+    height:auto;
+    overflow:auto;
+    margin:0;
+    left: 40px;
+    position: absolute;
+}
+h1
+{
+    text-align: center;
+}
+h2
+{
+    margin: 0;
+}
