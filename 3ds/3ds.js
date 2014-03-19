@@ -1,10 +1,26 @@
+var ui = {
+	pokemon_species: function(data)
+	{
+		pageInit();
+		$(".hcontent").append(data.name);
+	}
+}
+
+function pageInit()
+{
+	$(".content").empty();
+	$(".hcontent").empty();
+}
+
 function searchPage()
 {
+	pageInit();
 	var match = function(qd)
 	{
-		$("#results").append(JSON.stringify(qd)+"<br>");
+		var b = $("<button>"+qd.type+": "+qd.name+"</button>");
+		$("#results").append(b);
 	}
-	$(".content").empty().append('<input id="search" type="text"/><button id="searchb">Search</button><br><div id="results"></div>');
+	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><br><div id="results"></div>');
 	$("#searchb").click(function()
 	{
 		$("#results").empty();

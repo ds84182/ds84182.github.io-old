@@ -14,7 +14,7 @@ function getDataProcessor(q)
 				{
 					queryData[nam] = [];
 				}
-				queryData[nam].push({type:q,id:v[q+"_id"],csv:v});
+				queryData[nam].push({type:q,id:v[q+"_id"],csv:v,name:v.name});
 			}
 		}
 		dataNum--;
