@@ -1,4 +1,20 @@
-queryData = []; //objects that point to datatype and id
+queryData = {}; //objects that point to datatype and id
+function getDataProcessor(q)
+{
+	return function( data ) {
+		var csvobj = $.csv.toObjects(data);
+		alert("Loaded "+q);
+		for (var i in cvsobj)
+		{
+			var v = cvsobj[i];
+			if (queryData[v.name] === "undefined")
+			{
+				queryData[v.name] = [];
+			}
+			queryData[v.name].push({type:q,id:v[q+"_id"]});
+		}
+	}
+}
 $(function()
 {
 	setTimeout(function()
@@ -9,16 +25,14 @@ $(function()
 			//load files to do querys on
 			//use majik: $.csv.toObjects(data)
 			var queryFiles = [
-				{file:"ability_names",qdata:"name",qid:"ability_id"},
-				{file:"item_names",qdata:"name",qid:"item_id"},
+				"ability",
+				"item",
 			];
 			
-			for (q in queryFiles)
+			for (var i in queryFiles)
 			{
-				$.get( "/csv/"+q.file+".csv", function( data ) {
-					var csvobj = $.csv.toObjects(data);
-					alert("Loaded "+q.file);
-				});
+				var q = queryFiles[i];
+				$.get( "/csv/"+q+"_names.csv", getDataProcessor(q));
 			}
 		}
 	},500);
