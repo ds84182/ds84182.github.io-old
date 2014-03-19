@@ -9,11 +9,11 @@ function getDataProcessor(q)
 			var v = csvobj[i];
 			if (v.local_language_id == 9)
 			{
-				if (queryData[v.name] == null)
+				if (queryData[v.name.toLowerCase()] == null)
 				{
-					queryData[v.name] = [];
+					queryData[v.name.toLowerCase()] = [];
 				}
-				queryData[v.name].push({type:q,id:v[q+"_id"],csv:v});
+				queryData[v.name.toLowerCase()].push({type:q,id:v[q+"_id"],csv:v});
 			}
 		}
 		dataNum--;
@@ -34,7 +34,7 @@ function searchPage()
 	$("#searchb").click(function()
 	{
 		$("#results").empty();
-		var s = $("#search").val();
+		var s = $("#search").val().toLowerCase();
 		var words = s.split(" ");
 		if (queryData[s] != null)
 		{
@@ -80,6 +80,5 @@ $(function()
 				$.get( "/csv/"+q+"_names.csv", getDataProcessor(q));
 			}
 		}
-		searchPage();
 	},500);
 });
