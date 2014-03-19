@@ -3,7 +3,7 @@ var dataNum = 0;
 function getDataProcessor(q)
 {
 	return function( data ) {
-		var csvobj = JSON.parse(data.toString());
+		var csvobj = data;
 		for (var i in csvobj)
 		{
 			var v = csvobj[i];
