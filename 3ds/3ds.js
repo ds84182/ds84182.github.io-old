@@ -2,7 +2,29 @@ var ui = {
 	pokemon_species: function(data)
 	{
 		pageInit();
-		$(".hcontent").append(data.name);
+		unloadPP(); // Unload data to prepare for loading pkmn data
+		loadScreen();
+		$.get( "/json/pokemon.json", function(pk)
+		{
+			pk = JSON.parse(pk);
+			//find the id for the pkmn
+			for (var k in pk)
+			{
+				var v = pk[k];
+				if (v.id == data.id)
+				{
+					pk = v;
+					break;
+				}
+			}
+			pageInit();
+			$(".hcontent").append("<h4>"+data.name+" - The "+data.csv.genus+" Pokemon</h4>");
+			var b = $("<button>Search</button>");
+			$(".content").append(b);
+			b.click(loadPP);
+			
+			$(".content").append(JSON.stringify(pk));
+		});
 	}
 }
 
@@ -11,6 +33,11 @@ function pageInit()
 	$(".content").empty();
 	$(".hcontent").empty();
 	window.scrollTo(0,215);
+}
+
+function loadScreen()
+{
+	$(".content").append('<p style="float: right; position: relative; top:188px; margin: 0;">Loading...</p>');
 }
 
 function searchPage()
