@@ -20,6 +20,11 @@ body
     margin:0;
     position: absolute;
 }
+#search
+{
+	width: 100%;
+	text-align: center;
+}
 h1
 {
     text-align: center;
