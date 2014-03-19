@@ -19,9 +19,9 @@ function searchPage()
 {
 	var match = function(qd)
 	{
-		$("#results").append(qd+"<br>");
+		$("#results").append(JSON.stringify(qd)+"<br>");
 	}
-	$(".content").empty().append('<input id="search" type="text"/><button id="searchb">Search</button><div id="results"></div>');
+	$(".content").empty().append('<input id="search" type="text"/><button id="searchb">Search</button><br><div id="results"></div>');
 	$("#searchb").click(function()
 	{
 		var s = $("#search").val();
