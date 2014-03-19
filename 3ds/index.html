@@ -4,10 +4,16 @@
 		<link rel="stylesheet" type="text/css" href="3ds.css">
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script>
-			window.onload = function()
+			$(function()
 			{
-				setTimeout(function(){window.scrollTo(0,215);},500);
-			};
+				setTimeout(function()
+				{
+					window.scrollTo(0,215);
+					$( window ).scroll(function() {
+						alert("SRL");
+					});
+				},500);
+			});
 		</script>
 	</head>
 	<body>
