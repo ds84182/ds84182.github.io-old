@@ -25,6 +25,11 @@ function getDataProcessor(q)
 	}
 }
 
+function doQuery(q)
+{
+	$.get( "/json/"+q+"_names.json", getDataProcessor(q));
+}
+
 function loadPP()
 {
 	if (location.protocol != "file:")
@@ -45,8 +50,7 @@ function loadPP()
 		
 		for (var i in queryFiles)
 		{
-			var q = queryFiles[i];
-			$.get( "/json/"+q+"_names.json", getDataProcessor(q));
+			setTimeout(doQuery,100,queryFiles[i]);
 		}
 	}
 	else
