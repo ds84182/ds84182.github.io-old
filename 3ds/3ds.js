@@ -1,4 +1,5 @@
 queryData = {}; //objects that point to datatype and id
+dataNum = 0;
 function getDataProcessor(q)
 {
 	return function( data ) {
@@ -15,6 +16,11 @@ function getDataProcessor(q)
 				queryData[v.name].push({type:q,id:v[q+"_id"],csv:v});
 			}
 		}
+		dataNum--;
+		if (dataNum <= 0)
+		{
+			searchPage();
+		}
 	}
 }
 
@@ -27,6 +33,7 @@ function searchPage()
 	$(".content").empty().append('<input id="search" type="text"/><button id="searchb">Search</button><br><div id="results"></div>');
 	$("#searchb").click(function()
 	{
+		$("#results").empty();
 		var s = $("#search").val();
 		var words = s.split(" ");
 		if (queryData[s] != null)
@@ -57,7 +64,6 @@ $(function()
 	setTimeout(function()
 	{
 		window.scrollTo(0,215);
-		searchPage();
 		if (location.protocol != "file:")
 		{
 			//load files to do querys on
@@ -66,6 +72,7 @@ $(function()
 				"ability",
 				"item",
 			];
+			dataNum = queryFiles.length;
 			
 			for (var i in queryFiles)
 			{
@@ -73,5 +80,6 @@ $(function()
 				$.get( "/csv/"+q+"_names.csv", getDataProcessor(q));
 			}
 		}
+		searchPage();
 	},500);
 });
