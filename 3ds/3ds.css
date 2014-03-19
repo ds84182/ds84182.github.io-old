@@ -6,7 +6,7 @@ body
 }
 .header
 {
-    width:400px;
+    width:320px;
     height:215px;
     overflow:auto;
     margin:0;
@@ -17,7 +17,6 @@ body
     height:auto;
     overflow:auto;
     margin:0;
-    left: 40px;
     position: absolute;
 }
 h1
