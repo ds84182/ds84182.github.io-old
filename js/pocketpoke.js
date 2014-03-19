@@ -37,12 +37,12 @@ function loadPP()
 		var queryFiles = [
 			"ability",
 			"item",
-			//"location",
+			"location",
 			"move",
 			"pokemon_species",
-			//"region",
+			"region",
 			"stat",
-			//"version"
+			"version"
 		];
 		dataNum = queryFiles.length;
 		

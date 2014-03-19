@@ -10,6 +10,7 @@ function pageInit()
 {
 	$(".content").empty();
 	$(".hcontent").empty();
+	window.scrollTo(0,215);
 }
 
 function searchPage()
