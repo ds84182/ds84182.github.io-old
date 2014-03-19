@@ -6,11 +6,14 @@ function getDataProcessor(q)
 		for (var i in csvobj)
 		{
 			var v = csvobj[i];
-			if (queryData[v.name] == null)
+			if (v.local_language_id == 9)
 			{
-				queryData[v.name] = [];
+				if (queryData[v.name] == null)
+				{
+					queryData[v.name] = [];
+				}
+				queryData[v.name].push({type:q,id:v[q+"_id"],csv:v});
 			}
-			queryData[v.name].push({type:q,id:v[q+"_id"]});
 		}
 	}
 }
