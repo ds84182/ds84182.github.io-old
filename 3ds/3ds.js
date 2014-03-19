@@ -15,16 +15,33 @@ function pageInit()
 function searchPage()
 {
 	pageInit();
+	
+	var searcher = function(qd)
+	{
+		return function()
+		{
+			if (ui[qd.type] != null)
+			{
+				ui[qd.type](qd)
+			}
+			else
+			{
+				alert("Cannot load a "+qd.type);
+			}
+		}
+	}
+	
 	var match = function(qd)
 	{
 		for (var i in qd)
 		{
 			var qd = qd[i];
 			var b = $("<button>"+qd.type+": "+qd.name+"</button>");
+			b.click(searcher(qd));
 			$("#results").append(b);
 		}
 	}
-	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><br><div id="results"></div>');
+	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><div id="results"></div>');
 	$("#searchb").click(function()
 	{
 		$("#results").empty();
