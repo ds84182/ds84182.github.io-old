@@ -14,11 +14,45 @@ function getDataProcessor(q)
 		}
 	}
 }
+
+function searchPage()
+{
+	var match = function(qd)
+	{
+		$("#results").append(qd+"<br>");
+	}
+	$(".content").empty().append('<input id="search" type="text"/><button id="searchb">Search</button><div id="results"></div>');
+	$("#searchb").click(function()
+	{
+		var s = $("#search").val();
+		var words = s.split(" ");
+		if (queryData[s] != null)
+		{
+			match(queryData[s]);
+		}
+		for (var k, d in queryData)
+		{
+			if (k != s)
+			{
+				for (var n, word in words)
+				{
+					if (k.instanceOf(word))
+					{
+						match(d);
+						break;
+					}
+				}
+			}
+		}
+	});
+}
+
 $(function()
 {
 	setTimeout(function()
 	{
 		window.scrollTo(0,215);
+		searchPage();
 		if (location.protocol != "file:")
 		{
 			//load files to do querys on
