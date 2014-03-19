@@ -1,19 +1,21 @@
-queryData = {}; //objects that point to datatype and id
-dataNum = 0;
+var queryData = {}; //objects that point to datatype and id
+var dataNum = 0;
+var toObj = $.csv.toObjects;
 function getDataProcessor(q)
 {
 	return function( data ) {
-		var csvobj = $.csv.toObjects(data);
+		var csvobj = toObj(data);
 		for (var i in csvobj)
 		{
 			var v = csvobj[i];
 			if (v.local_language_id == 9)
 			{
-				if (queryData[v.name.toLowerCase()] == null)
+				var nam = v.name.toLowerCase();
+				if (queryData[nam] == null)
 				{
-					queryData[v.name.toLowerCase()] = [];
+					queryData[nam] = [];
 				}
-				queryData[v.name.toLowerCase()].push({type:q,id:v[q+"_id"],csv:v});
+				queryData[nam].push({type:q,id:v[q+"_id"],csv:v});
 			}
 		}
 		dataNum--;
