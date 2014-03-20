@@ -2,14 +2,12 @@ var ui = {
 	pokemon_species: function(data)
 	{
 		pageInit();
-		unloadPP(); // Unload data to prepare for loading pkmn data
+		//unloadPP(); // Unload data to prepare for loading pkmn data
 		loadScreen();
-		$.get( "/json/pokemon.json", function(pk)
+		$.get( "/json/pokemon/"+data.id+".json", function(pk)
 		{
-			pk = pk[Number(data.id-1)];
-			$.get( "/json/pokemon_species.json", function(species)
+			$.get( "/json/pokemon_species/"+data.id+".json", function(species)
 			{
-				species = species[Number(data.id-1)];
 				
 				var included = [];
 				for (var i in sprite_versions)
@@ -25,15 +23,25 @@ var ui = {
 				$(".hcontent").append("<h4>"+data.name+" - The "+data.csv.genus+" Pokemon</h4>");
 				var b = $("<button>Search</button>");
 				$(".content").append(b);
-				b.click(loadPP);
-				
-				$(".content").append(JSON.stringify(pk));
+				b.click(searchPage);
 				
 				foreach(included,function(v)
 				{
 					var s = mediaDir+"pokemon/main-sprites/"+v+"/"+pk.id+".png";
-					if (UrlExists(s))
-						$(".content").append("<img src='"+s+"'/>"+v+"<br>");
+					var div = $("<div id='"+v+"'>"+v+": </div><br>");
+					$(".content").append(div);
+					$.ajax({
+						url:s,
+						type:'HEAD',
+						error: function()
+						{
+							
+						},
+						success: function()
+						{
+							div.append("<img src='"+s+"' style='display:block;margin:0 auto;'/>");
+						}
+					});
 				},function(){});
 			},"json");
 		},"json");
