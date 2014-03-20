@@ -43,8 +43,14 @@ var ui = {
 						}
 					});
 				},function(){});
-			},"json");
-		},"json");
+			},"json").fail(function() {
+				alert( "An error occured while downloading the pokemon data" );
+				searchPage();
+			});
+		},"json").fail(function() {
+			alert( "An error occured while downloading the pokemon data" );
+			searchPage();
+		});
 	}
 }
 
@@ -83,45 +89,95 @@ function searchPage()
 			}
 		}
 	}
-	
-	var match = function(qd)
+	var obj;
+	var match = function(qd,i)
 	{
-		for (var i in qd)
-		{
-			var v = qd[i];
-			if (v != null)
-			{
-				var b = $("<button>"+v.type+": "+v.name+"</button>");
-				b.click(searcher(v));
-				$("#results").append(b);
-			}
-		}
+		if (obj[i] == null)
+			obj[i] = []
+		obj[i].push(qd);
 	}
 	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><div id="results"></div>');
 	$("#searchb").click(function()
 	{
+		var start = new Date().getTime();
+		obj = {};
 		$("#results").empty();
 		var s = $("#search").val().toLowerCase();
-		var words = s.split(" ");
+		var ltrs = s.split("");
 		if (queryData[s] != null)
 		{
-			match(queryData[s]);
+			match(queryData[s],1);
 		}
-		$.each(queryData, function(k,d)
+		var j = queryKeys.length;
+		while (j--)
 		{
+			var k = queryKeys[j];
+			var d = queryData[k];
 			if (k != s)
 			{
-				for (var n in words)
+				if (k.indexOf(s) >= 0)
 				{
-					var word = words[n];
-					if (k.indexOf(word) >= 0)
+					match(d,1);
+					continue;
+				}
+				var i = ltrs.length;
+				var f = false;
+				while (i--)
+				{
+					if (k.indexOf(ltrs[i]) >= 0)
 					{
-						match(d);
+						f = true;
 						break;
+					}
+				}
+				if (!f)
+					continue;
+				
+				var larg = Math.max(k.length,s.length);
+				var val = (larg-LevenshteinDistance(s.toLowerCase(),k.toLowerCase()))/larg;
+				if (val >= 0.5)
+				{
+					match(d,val);
+				}
+			}
+		}
+		
+		function keys(obj)
+		{
+			var keys = [];
+
+			for(var key in obj)
+			{
+				if(obj.hasOwnProperty(key))
+				{
+					keys.push(key);
+				}
+			}
+
+			return keys;
+		}
+		
+		keys(obj).sort().reverse().forEach(function(v)
+		{
+			var o = obj[v];
+			for (var e in o)
+			{
+				var qd = o[e];
+				for (var i in qd)
+				{
+					var v = qd[i];
+					if (v != null)
+					{
+						var b = $("<button>"+v.type+": "+v.name+"</button>");
+						b.click(searcher(v));
+						$("#results").append(b);
 					}
 				}
 			}
 		});
+		var end = new Date().getTime();
+		var time = end - start;
+		alert("Search time: "+time);
 	});
 }
 
