@@ -1,7 +1,7 @@
-var queryData = {}; //objects that point to datatype and id
-var queryKeys = [];
-var dataNum = 0;
-queryFiles = [ //These are also the types
+window["queryData"] = {}; //objects that point to datatype and id
+window["queryKeys"] = [];
+window["dataNum"] = 0;
+window["queryFiles"] = [ //These are also the types
 	"ability",
 	"item",
 	"location",
@@ -12,12 +12,13 @@ queryFiles = [ //These are also the types
 	"version"
 ];
 
-var mediaDir = "/media/";
+window["mediaDir"] = "/media/";
 
 function doLater(func)
 {
 	setTimeout(func,100);
 }
+window["doLater"] = doLater;
 
 function UrlExists(url)
 {
@@ -26,6 +27,7 @@ function UrlExists(url)
 		http.send();
 		return http.status!=404;
 }
+window["UrlExists"] = UrlExists;
 
 function foreach(array,doSomething,onComplete) {
 	var i = 0, len = array.length, completeCount = 0;
@@ -39,6 +41,7 @@ function foreach(array,doSomething,onComplete) {
 		},0,array[i]);
 	}
 };
+window["foreach"] = foreach;
 
 function getDataProcessor(q)
 {
@@ -65,6 +68,7 @@ function getDataProcessor(q)
 		}
 	}
 }
+window["getDataProcessor"] = getDataProcessor;
 
 function doQuery(q)
 {
@@ -78,8 +82,9 @@ function loadJSON(f,obj,index)
 		obj[index] = JSON.parse(data);
 	},"json");
 }
+window["loadJSON"] = loadJSON;
 
-sprite_versions = [{"id":"1","identifier":"red-blue","generation_id":"1","order":"1"},
+window["sprite_versions"] = [{"id":"1","identifier":"red-blue","generation_id":"1","order":"1"},
 {"id":"2","identifier":"yellow","generation_id":"1","order":"2"},
 {"id":"3","identifier":"gold","generation_id":"2","order":"3"},
 {"id":"3","identifier":"silver","generation_id":"2","order":"3"},
@@ -111,59 +116,10 @@ function loadPP()
 		searchPage();
 	}
 }
+window["loadPP"] = loadPP;
 
-var v0 = new Array(26);
-var v1 = new Array(26);
-//basically returns the number of unmatching characters
-function LevenshteinDistance(s, t)
-{
-    // degenerate cases
-    if (s == t) return 0;
-    if (s.length == 0) return t.length;
-    if (t.length == 0) return s.length;
- 
-    // initialize v0 (the previous row of distances)
-    // this row is A[0][i]: edit distance for an empty s
-    // the distance is just the number of characters to delete from t
-	var i, j, fi;
-	i = v0.length;
-    while(i--)
-        v0[i] = i;
- 
-    for (var i = 0; i < s.length; i++)
-    {
-        // calculate v1 (current row distances) from the previous row v0
- 
-        // first element of v1 is A[i+1][0]
-        //   edit distance is delete (i+1) chars from s to match empty t
-        v1[0] = i + 1;
-		var x = s[i];
- 
-        // use formula to fill in the rest of the row
-        for (var j = 0; j < t.length; j++)
-        {
-            var cost = (x == t[j]) ? 0 : 1;
-			var min = v1[j] + 1;
-			var a = v0[j + 1] + 1;
-			var b = v0[j] + cost;
-			if (a < min)
-				min = a;
-			if (b < min)
-				min = b;
-            v1[j + 1] = min;
-        }
- 
-        // copy v1 (current row) to v0 (previous row) for next iteration
-		j = v0.length
-        while (j--)
-            v0[j] = v1[j];
-    }
- 
-    return v1[t.length];
-}
-
-LevenshteinDistance = (function() {
-        var row2 = [];
+window["LevenshteinDistance"] = (function() {
+        var row2 = new Array(64);
         return function(s1, s2) {
             if (s1 === s2) {
                 return 0;

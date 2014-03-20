@@ -1,5 +1,5 @@
 var ui = {
-	pokemon_species: function(data)
+	"pokemon_species": function(data)
 	{
 		pageInit();
 		//unloadPP(); // Unload data to prepare for loading pkmn data
@@ -43,16 +43,17 @@ var ui = {
 						}
 					});
 				},function(){});
-			},"json").fail(function() {
+			},"json")["fail"](function() {
 				alert( "An error occured while downloading the pokemon data" );
 				searchPage();
 			});
-		},"json").fail(function() {
+		},"json")["fail"](function() {
 			alert( "An error occured while downloading the pokemon data" );
 			searchPage();
 		});
 	}
 }
+window["ui"] = ui;
 
 window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
     alert("Error occured: " + errorMsg);//or any message
@@ -65,11 +66,13 @@ function pageInit()
 	$(".hcontent").empty();
 	window.scrollTo(0,215);
 }
+window['pageInit'] = pageInit;
 
 function loadScreen()
 {
 	$(".content").append('<p style="float: right; position: relative; top:188px; margin: 0;">Loading...</p>');
 }
+window['loadScreen'] = loadScreen;
 
 function searchPage()
 {
@@ -90,57 +93,67 @@ function searchPage()
 		}
 	}
 	var obj;
-	var match = function(qd,i)
+	var matchm = function(qd,i)
 	{
 		if (obj[i] == null)
-			obj[i] = []
+			obj[i] = [];
 		obj[i].push(qd);
 	}
 	$(".content").append('<input id="search" type="text"/><button id="searchb">Search</button><div id="results"></div>');
 	$("#searchb").click(function()
 	{
-		var start = new Date().getTime();
 		obj = {};
 		$("#results").empty();
-		var s = $("#search").val().toLowerCase();
-		var ltrs = s.split("");
-		if (queryData[s] != null)
-		{
-			match(queryData[s],1);
-		}
+		//var start = new Date().getTime();
+		var s = $("#search")["val"]().toLowerCase();
+		var ltrs = s.split(" ");
 		var j = queryKeys.length;
+		var match = matchm;
+		var qk = queryKeys;
+		var qdat = queryData;
+		var ltrs = ltrs;
+		var ldist = LevenshteinDistance;
+		var ltrslen = ltrs.length;
+		
 		while (j--)
 		{
-			var k = queryKeys[j];
-			var d = queryData[k];
-			if (k != s)
+			var k = qk[j];
+			var d = qdat[k];
+			
+			if (k.indexOf(s) >= 0)
 			{
-				if (k.indexOf(s) >= 0)
+				match(d,1);
+				continue;
+			}
+			var i = ltrslen;
+			var f = false;
+			while (i--)
+			{
+				var w = ltrs[i];
+				var e = w.length;
+				while (e--)
 				{
-					match(d,1);
-					continue;
-				}
-				var i = ltrs.length;
-				var f = false;
-				while (i--)
-				{
-					if (k.indexOf(ltrs[i]) >= 0)
+					if (k.indexOf(w.substring(0,e)) >= 0)
 					{
 						f = true;
 						break;
 					}
-				}
-				if (!f)
-					continue;
-				
-				var larg = Math.max(k.length,s.length);
-				var val = (larg-LevenshteinDistance(s.toLowerCase(),k.toLowerCase()))/larg;
-				if (val >= 0.5)
-				{
-					match(d,val);
+					if (e<4) break;
 				}
 			}
+			if (!f)
+				continue;
+			match(d,0.5);
+			/*var larg = k.length;
+			var val = (larg-ldist(s,k))/larg;
+			if (val >= 0.5)
+			{
+				match(d,val);
+			}*/
 		}
+		//var end = new Date().getTime();
+		//var time = end - start;
+		//alert("Search time: "+time);
 		
 		function keys(obj)
 		{
@@ -175,11 +188,9 @@ function searchPage()
 				}
 			}
 		});
-		var end = new Date().getTime();
-		var time = end - start;
-		alert("Search time: "+time);
 	});
 }
+window['searchPage'] = searchPage;
 
 $(function()
 {
