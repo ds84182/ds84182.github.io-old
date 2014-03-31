@@ -1,12 +1,13 @@
+var err = function() {
+	alert( "An error occured while downloading the pokemon data" );
+	searchPage();
+}
+
 var ui = {
 	"pokemon_species": function(data)
 	{
 		pageInit();
 		loadScreen();
-		var err = function() {
-			alert( "An error occured while downloading the pokemon data" );
-			searchPage();
-		}
 		
 		$.get( "/json/pokemon/"+data.id+".json", function(pk)
 		{
@@ -34,7 +35,7 @@ var ui = {
 							bstats += "Base "+stats[v.stat_id-1].identifier.toUpperCase()+": "+v.base_stat+"<br>";
 						});
 						
-						$(".hcontent")
+						$(".content")
 							.append("<h2>"+data.id+": "+data.name+" - The "+data.csv.genus+" Pokemon</h2>");
 						$(".content").append("<h3>Base Stats</h3><p>"+bstats+"</p>");
 						
@@ -151,15 +152,53 @@ function pageInit()
 {
 	$(".content").empty();
 	$(".hcontent").empty();
-	window.scrollTo(0,215);
+	$("#loader").css("display","none");
 }
 window['pageInit'] = pageInit;
 
 function loadScreen()
 {
-	$(".content").append('<p style="float: right; position: relative; top:188px; margin: 0;">Loading...</p>');
+	$("#loader").css("display","");
 }
 window['loadScreen'] = loadScreen;
+
+ui.item = function(item)
+{
+	pageInit();
+	loadScreen();
+	$.get( "/json/items/"+item.id+".json", function(pk)
+	{
+		$.get( "/json/item_prose/"+item.id+".json", function(prose)
+		{
+			pageInit();
+			var s = mediaDir+"items/"+pk.identifier+".png";
+			$(".content").append("<h2>"+item.id+": "+item.name+"</h2>");
+			$(".content").append("<img id='pkimg' src='"+s+"' style='display:block;margin:0 auto;'/>");
+			$(".content").append("<p>"+formatData(prose.effect)+"</p>");
+			registerLinkHandler();
+			
+			var search = $("<button>Search</button>");
+			search.click(function()
+			{
+				searchPage();
+			});
+			
+			var prev = $("<button>Previous</button>");
+			prev.click(function()
+			{
+				ui.item(item.prev);
+			});
+			
+			var next = $("<button>Next</button>");
+			next.click(function()
+			{
+				ui.item(item.next);
+			});
+			
+			$(".content").append(prev,search,next);
+		},"json").onerror=err;
+	},"json").onerror=err;
+}
 
 ui.home = function ()
 {
@@ -219,9 +258,13 @@ ui.searchPage = function ()
 			var k = qk[j];
 			var d = qdat[k];
 			
-			if (k.indexOf(s) >= 0)
+			if (k.startsWith(s))
 			{
 				match(d,1);
+				continue;
+			} else if (k.indexOf(s) >= 0)
+			{
+				match(d,0.75);
 				continue;
 			}
 			var i = ltrslen;

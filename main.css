@@ -2,23 +2,7 @@ body
 {
     margin:0;
 	background-color: rgb(64,64,64);
-	color: lightgrey;
-}
-.header
-{
-    width:320px;
-    height:215px;
-    overflow:auto;
-    margin:0;
-}
-.content
-{
-    width:320px;
-    height:auto;
-	min-height:212px;
-    overflow:auto;
-    margin:0;
-    position: absolute;
+	color: white;
 }
 a
 {
@@ -44,17 +28,28 @@ a:active
 	width: 25%;
 	text-align: center;
 	margin: 0;
-	left: 75%;
 	top: 0;
-	position: absolute;
+	position: relative;
 }
 h1
 {
     text-align: center;
 	color: darkred;
-	text-shadow: 0em 0em 1em black;
+	text-shadow: 1px 1px 0 firebrick, 0 0 0.25em black;
 }
 h2
 {
     margin: 0;
+}
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    -webkit-animation: rotating 10s linear infinite;
 }
