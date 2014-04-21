@@ -1,3 +1,36 @@
+//polyfills
+
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function (searchString, position) {
+      position = position || 0;
+      return this.indexOf(searchString, position) === position;
+    }
+  });
+}
+
+if (!String.prototype.endsWith) {
+    Object.defineProperty(String.prototype, 'endsWith', {
+        enumerable: false,
+        configurable: false,
+        writable: false,
+        value: function (searchString, position) {
+            position = position !== undefined && position < this.length ? position : this.length;
+            position = position - searchString.length;
+            return position >= 0 && this.lastIndexOf(searchString, position) === position;
+        }
+    });
+}
+
+if ( !String.prototype.contains ) {
+    String.prototype.contains = function() {
+        return String.prototype.indexOf.apply( this, arguments ) !== -1;
+    };
+}
+
 window["queryData"] = {}; //objects that point to datatype and id
 window["queryKeys"] = [];
 window["dataNum"] = 0;
