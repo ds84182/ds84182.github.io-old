@@ -1,6 +1,6 @@
 {
 	"banner_type" : "scroll_hor",
-	"banner_speed" : 0.233333333,
+	"banner_speed" : 0.125,
 	"hash" : "aa804de6b849433887a93130cc25335f9fa3a228",
 	"name" : "Flappy Bird Deluxe",
 	"desc" : "A game where birds need help flying through bullshit pipes"
