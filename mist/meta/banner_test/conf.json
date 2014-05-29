@@ -1,0 +1,10 @@
+{
+	"banner_type" : "custom",
+	"banner_assets" : {
+		"images" : ["block.png"],
+		"sounds" : []
+	},
+	"name" : "Banner Test",
+	"desc" : "This isn't a game, it's just here to test the banner format",
+	"version" : [1,0,0]
+}
