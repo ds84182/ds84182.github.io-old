@@ -212,6 +212,7 @@ function draw()
 		love.graphics.setColor(backgroundc)
 		love.graphics.rectangle("fill",0,0,love.graphics.getDimensions())
 		
+		love.graphics.setColor(255,255,255)
 		love.graphics.push()
 		love.graphics.translate(-camx,0)
 		for y = 1, 15 do
