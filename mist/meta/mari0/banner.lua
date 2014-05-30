@@ -111,8 +111,8 @@ function loadbackground(background)
 	
 	customtiles = true
 	customtilesimg = getAsset "tiles.png"
-	customtilesimg:setFilter("nearest")
 	if not customtilesimg then print("Cannot load because: Missing tileset") return false end
+	customtilesimg:setFilter("nearest")
 	
 	local s2 = s:split(";")
 	
