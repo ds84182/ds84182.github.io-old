@@ -185,7 +185,7 @@ function loadbackground(background)
 		if s3[1] == "background" then
 			local backgroundi = tonumber(s3[2])
 	
-			love.graphics.setBackgroundColor(backgroundcolor[backgroundi])
+			backgroundc = backgroundcolor[backgroundi]
 		elseif s3[1] == "spriteset" then
 			spriteset = tonumber(s3[2])
 		elseif s3[1] == "custombackground" or s3[1] == "portalbackground" then
@@ -209,6 +209,9 @@ end
 function draw()
 	if map then
 		local scale = 2--love.graphics.getHeight()/(15*16)
+		love.graphics.setColor(backgroundc)
+		love.graphics.rectangle("fill",0,0,love.graphics.getDimensions())
+		
 		love.graphics.push()
 		love.graphics.translate(-camx,0)
 		for y = 1, 15 do
