@@ -1,0 +1,36 @@
+/*Accent color: #5E98C1*/
+/*Line color: #457FA8*/
+/*Content BG color: #2B658E*/
+/*Background color: #124C75*/
+
+body
+{
+	background-color: #124C75;
+	color: white;
+}
+
+div
+{
+	background-color: #2B658E;
+}
+
+.header
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 3em;
+	max-height: 3em;
+	border-bottom: 1px solid #457FA8;
+	z-index: 9001;
+}
+
+.maincontent
+{
+	position: absolute;
+	top: 3em;
+	left: 12.5%;
+	width: 75%;
+	min-height: calc(100% - 3em);
+}
