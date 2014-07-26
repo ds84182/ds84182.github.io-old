@@ -14,7 +14,7 @@ div
 	background-color: #2B658E;
 }
 
-.header
+#header
 {
 	position: fixed;
 	top: 0;
@@ -26,11 +26,32 @@ div
 	z-index: 9001;
 }
 
-.maincontent
+#bgdiv
 {
 	position: absolute;
 	top: 3em;
 	left: 12.5%;
 	width: 75%;
 	min-height: calc(100% - 3em);
+}
+
+#maincontent
+{
+	position: absolute;
+	top: 3em;
+	left: 12.5%;
+	width: 75%;
+	min-height: calc(100% - 3em);
+	background-color: rgba(0,0,0,0);
+}
+
+#maincontentghost
+{
+	position: absolute;
+	top: 3em;
+	left: 12.5%;
+	width: 75%;
+	min-height: calc(100% - 3em);
+	background-color: rgba(0,0,0,0);
+	pointer-events: none;
 }
