@@ -28,7 +28,7 @@ div
 
 #bgdiv
 {
-	position: absolute;
+	position: fixed;
 	top: 3em;
 	left: 12.5%;
 	width: 75%;
