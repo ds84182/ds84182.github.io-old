@@ -5,13 +5,13 @@
 
 body
 {
-	background-color: #00796b;
-	color: white;
+	background-color: #0288d1;
+	font-family: 'Droid Sans', sans-serif;
 }
 
 div
 {
-	background-color: #009688;
+	background-color: #29b6f6;
 }
 
 #header
@@ -22,7 +22,8 @@ div
 	width: 100%;
 	min-height: 3em;
 	max-height: 3em;
-	border-bottom: 1px solid #00796b;
+	border-bottom: 1px solid #03a9f4;
+	background-color: #03a9f4;
 	z-index: 9001;
 }
 
