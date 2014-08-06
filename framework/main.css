@@ -5,13 +5,13 @@
 
 body
 {
-	background-color: #124C75;
+	background-color: #00796b;
 	color: white;
 }
 
 div
 {
-	background-color: #2B658E;
+	background-color: #009688;
 }
 
 #header
@@ -22,7 +22,7 @@ div
 	width: 100%;
 	min-height: 3em;
 	max-height: 3em;
-	border-bottom: 1px solid #457FA8;
+	border-bottom: 1px solid #00796b;
 	z-index: 9001;
 }
 
