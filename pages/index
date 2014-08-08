@@ -1,5 +1,5 @@
 <p>Hello, and welcome to my personal website!</p>
 <p>This website is mainly used for my class, Computer Science Principles, but it may be used in the future for other things.</p>
-<img src="assets/images/chart.png" style="display: block; width:22em; margin: 1em auto;"/><br>
 <a class="frameworklink" href="other">Test framework link class</a><br>
+<a class="frameworklink" href="learningstyle">Learning Styles</a><br>
 <a href="/pkpk">Test external link</a>

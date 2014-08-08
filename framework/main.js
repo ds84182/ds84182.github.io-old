@@ -1,4 +1,5 @@
 framework = {};
+framework.page = null;
 
 document.addEventListener('click', function(e) {
 	var target = $(e.target);
@@ -11,6 +12,8 @@ document.addEventListener('click', function(e) {
 
 framework.load = function(page)
 {
+	framework.page = page;
+	window.location.hash = page;
 	$(document.body).animate({scrollTop: 0}, 500);
 	
 	$("#maincontentghost").css("opacity",1).empty().append($("#maincontent").children().detach());
@@ -21,7 +24,14 @@ framework.load = function(page)
 	});
 }
 
+$(window).on('hashchange', function() {
+	if (window.location.hash.substring(1,window.location.hash.length) != framework.page)
+	{
+		framework.load(window.location.hash.substring(1,window.location.hash.length));
+	}
+});
+
 $(window).load(function()
 {
-	framework.load("index");
+	framework.load(window.location.hash.length > 0 ? window.location.hash.substring(1,window.location.hash.length) : "index");
 });

@@ -6,7 +6,32 @@
 body
 {
 	background-color: #0288d1;
-	font-family: 'Droid Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
+}
+
+input[type="button"]
+{
+	background-color: #0288d1;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px rgba(1,1,1,0.5);
+	-webkit-transition: box-shadow ease-out 0.25s;
+}
+
+input[type="button"]:hover
+{
+	box-shadow: 1.5px 1.5px 1px rgba(1,1,1,0.5);
+}
+
+input[type="button"]:active
+{
+	background-color: #29b6f6;
+	box-shadow: 2px 2px 1px rgba(1,1,1,0.5);
+}
+
+input[type="button"]:focus
+{
+	outline-width: 0;
 }
 
 div
