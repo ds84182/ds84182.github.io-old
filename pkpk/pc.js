@@ -150,8 +150,8 @@ window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
 
 function pageInit()
 {
-	$(".content").empty();
-	$(".hcontent").empty();
+	$(".content").find( "*" ).off().remove();
+	$(".hcontent").find( "*" ).off().remove(); //fixes a memory leak
 	$("#loader").css("display","none");
 }
 window['pageInit'] = pageInit;
