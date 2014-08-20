@@ -46,9 +46,10 @@ window["queryFiles"] = [ //These are also the types
 	//"version_names"
 ];
 
-window["mediaDir"] = "/media/";
+window["mediaDir"] = "media/";
 window["lowMem"] = false;
 window["loadedQueryData"] = false;
+window["jsonDir"] = "json/";
 
 function doLater(func)
 {
@@ -110,12 +111,12 @@ window["getDataProcessor"] = getDataProcessor;
 
 function doQuery(q)
 {
-	$.get( "/json/"+q+".json", getDataProcessor(q.substring(0,q.length-6)),"json");
+	$.get( jsonDir+q+".json", getDataProcessor(q.substring(0,q.length-6)),"json");
 }
 
 function loadJSON(f,obj,index)
 {
-	$.get( "/json/"+f+".json", function(data)
+	$.get( jsonDir+f+".json", function(data)
 	{
 		obj[index] = JSON.parse(data);
 	},"json");
