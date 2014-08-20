@@ -1,1 +1,4 @@
-<iframe src="https://docs.google.com/document/d/1ERZK6CkzwF_IAnbZx_kphXw-HYxGCZStO-1hIHdXnl4/pub?embedded=true"></iframe>
+<iframe src="https://docs.google.com/document/d/1ERZK6CkzwF_IAnbZx_kphXw-HYxGCZStO-1hIHdXnl4/pub?embedded=true" style="
+    width:  100%;
+    height: calc(100% - 3em - 4px);
+"></iframe>
