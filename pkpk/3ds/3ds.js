@@ -1,4 +1,4 @@
-jsonDir = "../json";
+window.jsonDir = "../json/";
 var ui = {
 	"pokemon_species": function(data)
 	{
