@@ -9,13 +9,13 @@ var ui = {
 		pageInit();
 		loadScreen();
 		
-		$.get( "json/pokemon/"+data.id+".json", function(pk)
+		$.get( jsonDir+"pokemon/"+data.id+".json", function(pk)
 		{
-			$.get( "json/pokemon_species/"+data.id+".json", function(species)
+			$.get( jsonDir+"pokemon_species/"+data.id+".json", function(species)
 			{
-				$.get( "json/pokemon_stats/"+data.id+".json", function(st)
+				$.get( jsonDir+"pokemon_stats/"+data.id+".json", function(st)
 				{
-					$.get( "json/pokemon_species_flavor_text/"+data.id+".json", function(desc)
+					$.get( jsonDir+"pokemon_species_flavor_text/"+data.id+".json", function(desc)
 					{
 						var included = [];
 						for (var i in version_groups)
@@ -166,9 +166,9 @@ ui.item = function(item)
 {
 	pageInit();
 	loadScreen();
-	$.get( "json/items/"+item.id+".json", function(pk)
+	$.get( jsonDir+"items/"+item.id+".json", function(pk)
 	{
-		$.get( "json/item_prose/"+item.id+".json", function(prose)
+		$.get( jsonDir+"item_prose/"+item.id+".json", function(prose)
 		{
 			pageInit();
 			var s = mediaDir+"items/"+pk.identifier+".png";
