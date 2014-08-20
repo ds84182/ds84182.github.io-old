@@ -1,4 +1,5 @@
 window.jsonDir = "../json/";
+window.mediaDir = "../media/";
 var ui = {
 	"pokemon_species": function(data)
 	{
