@@ -9,13 +9,13 @@ var ui = {
 		pageInit();
 		loadScreen();
 		
-		$.get( "/json/pokemon/"+data.id+".json", function(pk)
+		$.get( "json/pokemon/"+data.id+".json", function(pk)
 		{
-			$.get( "/json/pokemon_species/"+data.id+".json", function(species)
+			$.get( "json/pokemon_species/"+data.id+".json", function(species)
 			{
-				$.get( "/json/pokemon_stats/"+data.id+".json", function(st)
+				$.get( "json/pokemon_stats/"+data.id+".json", function(st)
 				{
-					$.get( "/json/pokemon_species_flavor_text/"+data.id+".json", function(desc)
+					$.get( "json/pokemon_species_flavor_text/"+data.id+".json", function(desc)
 					{
 						var included = [];
 						for (var i in version_groups)
@@ -97,7 +97,7 @@ var ui = {
 						{
 							//code called when the page is left
 							//replaces all img src with 1x1.png
-							$("#pkimg").attr("src","/1x1.png");
+							$("#pkimg").attr("src","1x1.png");
 							//free memory by removing arguments
 							pk = null;
 							species = null;
@@ -166,9 +166,9 @@ ui.item = function(item)
 {
 	pageInit();
 	loadScreen();
-	$.get( "/json/items/"+item.id+".json", function(pk)
+	$.get( "json/items/"+item.id+".json", function(pk)
 	{
-		$.get( "/json/item_prose/"+item.id+".json", function(prose)
+		$.get( "json/item_prose/"+item.id+".json", function(prose)
 		{
 			pageInit();
 			var s = mediaDir+"items/"+pk.identifier+".png";
