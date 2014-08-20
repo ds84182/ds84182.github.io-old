@@ -52,7 +52,7 @@ var ui = {
 						function switchGen(g)
 						{
 							//g is a value in included
-							$("#pkimg").attr("src","/1x1.png");
+							$("#pkimg").attr("src","../1x1.png");
 							gen = g;
 							var gd = $("#gendata").empty().append("<h2>Version Group: "+gen.identifier+"</h2>");
 							loadSprite();
