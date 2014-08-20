@@ -151,8 +151,8 @@ window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
 
 function pageInit()
 {
-	$(".content").empty();
-	$(".hcontent").empty();
+	$(".content").children().remove();
+	$(".hcontent").children().remove(); //fixes a memory leak
 	window.scrollTo(0,215);
 }
 window['pageInit'] = pageInit;
