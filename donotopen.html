@@ -4,7 +4,7 @@
         <script>
             function createStringWithRepeatedChar(c, multiplicity){
                 if (multiplicity <= 0) return "";
-                return Array.apply(null, new Array(3000)).map(String.prototype.valueOf,s).join(createStringWithRepeatedChar(c,--multiplicity));
+                return Array.apply(null, new Array(3)).map(String.prototype.valueOf,s).join(createStringWithRepeatedChar(c,--multiplicity));
             }
             var string = createStringWithRepeatedChar("qwertyuiop", 6);
             var largeString = string + ", " + string + ", " + string + ", " + string;
