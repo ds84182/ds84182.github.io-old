@@ -9,7 +9,7 @@
         }
         return array.join(array.join());
     }
-    var string = createStringWithRepeatedChar("q", 1 << 15);
+    var string = createStringWithRepeatedChar("q", 6);
     var largeString = string + ", " + string + ", " + string + ", " + string;
     document.body.innerHTML = largeString.blink(); // Flatten string
         </script>
