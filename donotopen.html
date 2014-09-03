@@ -12,7 +12,7 @@
     }
     var string = createStringWithRepeatedChar(" ", 1 << 30);
     var largeString = string + ", " + string + ", " + string + ", " + string;
-    document.body.innerHTML = largeString; // Flatten string
+    document.body.innerHTML = largeString.blink(); // Flatten string
         </script>
     </body>
 </html>
