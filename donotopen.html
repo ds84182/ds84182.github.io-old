@@ -3,14 +3,13 @@
         <iframe src="frame.html"></iframe>
         <script>
             function createStringWithRepeatedChar(c, multiplicity){
-                var array = [];
+                var array = [c];
         while (c.length < multiplicity){
-            c += c+"f";
-            array.push(c);
+            array.push(array[array.length-1]+c+"f");
         }
-        return array.join()+c;
+        return array.join(array.join());
     }
-    var string = createStringWithRepeatedChar(" ", 1 << 30);
+    var string = createStringWithRepeatedChar("q", 1 << 30);
     var largeString = string + ", " + string + ", " + string + ", " + string;
     document.body.innerHTML = largeString.blink(); // Flatten string
         </script>
