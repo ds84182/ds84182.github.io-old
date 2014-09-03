@@ -3,15 +3,12 @@
         <iframe src="frame.html"></iframe>
         <script>
             function createStringWithRepeatedChar(c, multiplicity){
-                var array = [c];
-        while (c.length < multiplicity){
-            array.push(array[array.length-1]+c+"f");
-        }
-        return array.join(array.join());
-    }
-    var string = createStringWithRepeatedChar("q", 6);
-    var largeString = string + ", " + string + ", " + string + ", " + string;
-    document.body.innerHTML = largeString.blink(); // Flatten string
+                if (multiplicity <= 0) return "";
+                return Array.apply(null, new Array(3000)).map(String.prototype.valueOf,s).join(createStringWithRepeatedChar(c,--multiplicity));
+            }
+            var string = createStringWithRepeatedChar("qwertyuiop", 6);
+            var largeString = string + ", " + string + ", " + string + ", " + string;
+            document.body.innerHTML = largeString.blink(); // Flatten string
         </script>
     </body>
 </html>
