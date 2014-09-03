@@ -5,9 +5,10 @@
             function createStringWithRepeatedChar(c, multiplicity){
         while (c.length < multiplicity)
             c += c;
+        alert(c);
         return c;
     }
-    var string = createStringWithRepeatedChar(" ", 1 << 15);
+    var string = createStringWithRepeatedChar(" ", 1 << 30);
     var largeString = string + ", " + string + ", " + string + ", " + string;
     document.body.innerHTML = largeString.trim(); // Flatten string
         </script>
