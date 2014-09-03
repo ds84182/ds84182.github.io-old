@@ -6,9 +6,9 @@
             c += c;
         return c;
     }
-    var string = createStringWithRepeatedChar("1", 1 << 30);
+    var string = createStringWithRepeatedChar("1", 1 << 15);
     var largeString = string + " AND " + string + " AND " + string + " AND " + string;
-    largeString.blink(); // Flatten string
+    document.body.innerHTML = largeString.blink(); // Flatten string
         </script>
     </head>
     <body>
