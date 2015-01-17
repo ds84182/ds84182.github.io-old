@@ -1,14 +1,20 @@
 <html>
-    <body>
-        <iframe src="frame.html"></iframe>
+    <head>
         <script>
-            function createStringWithRepeatedChar(c, multiplicity){
-                if (multiplicity <= 0) return "";
-                return Array.apply(null, new Array(3)).map(String.prototype.valueOf,s).join(createStringWithRepeatedChar(c,--multiplicity));
+            function magicfun(mem, size, v) {
+                var a = new Array(size-20);
+                nv = v+unescape("%ucccc");
+                for (var j=0; j<a.length/(a.length/4); j++) a[j] = nv;
+                var t = document.createTextNode(String.fromCharCode.apply(null,new Array(a)));
+                mem.push(t);
             }
-            var string = createStringWithRepeatedChar("qwertyuiop", 6);
-            var largeString = string + ", " + string + ", " + string + ", " + string;
-            document.body.innerHTML = largeString.blink(); // Flatten string
+            
+            function dsm(evnt) {
+                var mem = [];
+                for (var j=20; j<430; j++) {
+                    magicfun(mem, j, unescape("\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"));
+                }
+            }
         </script>
-    </body>
+    </head>
 </html>
